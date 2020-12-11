@@ -3,9 +3,8 @@ import { ThemeProvider } from 'styled-components';
 import { light, dark } from '../styles/theme';
 import usePersistedState from '../hooks/usePersistedState';
 
-
 function MyApp({ Component, pageProps }) {
-  const [theme, setTheme] = usePersistedState('theme', 'light');
+  const [theme, setTheme] = usePersistedState<'light' | 'dark'>('theme', 'light');
 
   function toggleTheme() {
     setTheme(theme === 'light' ? 'dark' : 'light');

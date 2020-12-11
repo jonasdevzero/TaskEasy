@@ -1,7 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Dispatch, SetStateAction } from 'react';
 
-function usePersistedState(key: any, initialState: any) {
-    const [state, setState] = useState<any>()
+type Response<T> = [
+    T,
+    Dispatch<SetStateAction<T>>
+];
+
+function usePersistedState<T>(key: any, initialState: T): Response<T> {
+    const [state, setState] = useState<T>(initialState);
 
     useEffect(() => {
         const storageItem = localStorage.getItem(key);
@@ -11,7 +16,7 @@ function usePersistedState(key: any, initialState: any) {
         } else {
             setState(initialState);
         };
-    }, [])
+    }, []);
 
     useEffect(() => {
         localStorage.setItem(key, JSON.stringify(state))
