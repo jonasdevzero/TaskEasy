@@ -1,16 +1,24 @@
 import Head from 'next/head';
 
-export default function Home() {
+import {
+  ThemeController,
+  Main,
+} from '../styles/pages/Landing';
+
+interface ILanding {
+  currentTheme: 'light' | 'dark';
+};
+
+export default function Landing({ currentTheme }: ILanding) {
   return (
-    <div>
+    <ThemeController currentTheme={currentTheme}>
       <Head>
-        <title>ZeroHard</title>
+        <title>ZeroHard | Here you made your objectives</title>
       </Head>
 
-      <body>
+      <Main>
         <h1>Zero Hard</h1>
-      </body>
-
-    </div>
+      </Main>
+    </ThemeController>
   );
-}
+};
