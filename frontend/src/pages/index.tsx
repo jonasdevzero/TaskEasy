@@ -5,9 +5,13 @@ import {
   Main,
   Content,
   StyledLink
-} from '../styles/pages/Landing';
+} from '../styles/pages/Home';
 
-export default function Landing() {
+interface IHome {
+  toggleTheme(): void;
+};
+
+export default function Home({ toggleTheme }: IHome) {
   return (
     <>
       <Head>
@@ -16,11 +20,15 @@ export default function Landing() {
 
       <Main>
         <Content>
-          <h1>TaskEasy</h1>
-          <p>Here you made your objectives easily.</p>
-          <Link href="/">
-            <StyledLink>GET STARTED</StyledLink>
-          </Link>
+          <div>
+            <h1 onClick={toggleTheme}>
+              Task <span>Easy</span>
+            </h1>
+            <p>Here you made your objectives easily.</p>
+            <Link href="/">
+              <StyledLink>START NOW</StyledLink>
+            </Link>
+          </div>
 
           <img src="/checklist.png" alt="" />
         </Content>

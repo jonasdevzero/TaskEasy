@@ -17,16 +17,34 @@ export const Content = styled.div`
     height: 50rem;
 
     display: flex;
-    flex-direction: column;
+    align-items: center;
 
+    div {
+        display: flex;
+        flex-direction: column;
+        flex: .6;
+        justify-content: center;
+    };
     h1 {
-        font-size: 7rem;
+        font-size: 5rem;
+        
+        span {
+            font-size: 13rem;
+            line-height: 10rem;
+            display: block;
+        };
     };
     p {
         font-size: 2.5rem;
+        margin-top: 3rem;
+        margin-bottom: 4rem;
     };
+
     img {
         object-fit: contain;
+        height: 50rem;
+        width: 45rem;
+        flex: .4;
     };
 
     @media (max-width: 900px) {
@@ -49,6 +67,6 @@ export const StyledLink = styled.a`
     color: #FFF;
 
     &:hover {
-        opacity: .5;
+        opacity: .7;
     };
 `;
