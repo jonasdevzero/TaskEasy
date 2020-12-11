@@ -1,24 +1,30 @@
 import Head from 'next/head';
+import Link from 'next/link';
 
 import {
-  ThemeController,
   Main,
+  Content,
+  StyledLink
 } from '../styles/pages/Landing';
 
-interface ILanding {
-  currentTheme: 'light' | 'dark';
-};
-
-export default function Landing({ currentTheme }: ILanding) {
+export default function Landing() {
   return (
-    <ThemeController currentTheme={currentTheme}>
+    <>
       <Head>
-        <title>ZeroHard | Here you made your objectives</title>
+        <title>TaskEasy | Here you made your objectives easily</title>
       </Head>
 
       <Main>
-        <h1>Zero Hard</h1>
+        <Content>
+          <h1>TaskEasy</h1>
+          <p>Here you made your objectives easily.</p>
+          <Link href="/">
+            <StyledLink>GET STARTED</StyledLink>
+          </Link>
+
+          <img src="/checklist.png" alt="" />
+        </Content>
       </Main>
-    </ThemeController>
+    </>
   );
 };

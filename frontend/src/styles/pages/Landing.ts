@@ -7,17 +7,48 @@ export const Main = styled.main`
     display: flex;
     align-items: center;
     justify-content: center;
+
+    background-color: ${({ theme }) => theme.backgroundColor};
 `;
 
-interface IThemeController {
-    currentTheme: 'light' | 'dark';
-};
-export const ThemeController = styled.div<IThemeController>`
-    ${Main} {
-        background-color: ${({ theme, currentTheme }) => theme[currentTheme].backgroundColor};
-    };
+export const Content = styled.div`
+    max-width: 90rem;
+    width: 100%;
+    height: 50rem;
+
+    display: flex;
+    flex-direction: column;
 
     h1 {
-        color: ${({ theme, currentTheme }) => theme[currentTheme].textColor};
-    }
+        font-size: 7rem;
+    };
+    p {
+        font-size: 2.5rem;
+    };
+    img {
+        object-fit: contain;
+    };
+
+    @media (max-width: 900px) {
+        padding: 5rem 3rem;
+    };
+`;
+
+export const StyledLink = styled.a`
+    width: max-content;
+    font-size: 1.7rem;
+    font-weight: bold;
+
+    padding: 1.2rem;
+    border: solid .2rem #FFF;
+    border-radius: 5rem;
+
+    transition: opacity .3s ease;
+    cursor: pointer;
+
+    color: #FFF;
+
+    &:hover {
+        opacity: .5;
+    };
 `;
