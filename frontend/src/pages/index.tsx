@@ -3,15 +3,14 @@ import Link from 'next/link';
 
 import {
   Main,
+} from '../styles/pages/Global';
+import {
   Content,
+  Info,
   StyledLink
 } from '../styles/pages/Home';
 
-interface IHome {
-  toggleTheme(): void;
-};
-
-export default function Home({ toggleTheme }: IHome) {
+export default function Home() {
   return (
     <>
       <Head>
@@ -20,15 +19,22 @@ export default function Home({ toggleTheme }: IHome) {
 
       <Main>
         <Content>
-          <div>
-            <h1 onClick={toggleTheme}>
+          <Info>
+            <h1>
               Task <span>Easy</span>
             </h1>
             <p>Here you made your objectives easily.</p>
-            <Link href="/">
-              <StyledLink>START NOW</StyledLink>
-            </Link>
-          </div>
+
+            <div>
+              <Link href="/signin">
+                <StyledLink className="signin">SIGN IN</StyledLink>
+              </Link>
+
+              <Link href="/signup">
+                <StyledLink>START NOW</StyledLink>
+              </Link>
+            </div>
+          </Info>
 
           <img src="/checklist.png" alt="" />
         </Content>

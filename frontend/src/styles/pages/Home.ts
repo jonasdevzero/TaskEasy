@@ -1,16 +1,5 @@
 import styled from 'styled-components';
 
-export const Main = styled.main`
-    width: 100vw;
-    height: 100vh;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background-color: ${({ theme }) => theme.backgroundColor};
-`;
-
 export const Content = styled.div`
     max-width: 90rem;
     width: 100%;
@@ -19,11 +8,25 @@ export const Content = styled.div`
     display: flex;
     align-items: center;
 
+    img {
+        object-fit: contain;
+        height: 50rem;
+        width: 45rem;
+    };
+
+    @media (max-width: 900px) {
+        padding: 5rem 3rem;
+    };
+`;
+
+export const Info = styled.div`
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+
     div {
         display: flex;
-        flex-direction: column;
-        flex: .6;
-        justify-content: center;
     };
     h1 {
         font-size: 5rem;
@@ -37,36 +40,31 @@ export const Content = styled.div`
     p {
         font-size: 2.5rem;
         margin-top: 3rem;
-        margin-bottom: 4rem;
-    };
-
-    img {
-        object-fit: contain;
-        height: 50rem;
-        width: 45rem;
-        flex: .4;
-    };
-
-    @media (max-width: 900px) {
-        padding: 5rem 3rem;
+        margin-bottom: 2rem;
     };
 `;
 
 export const StyledLink = styled.a`
-    width: max-content;
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     font-weight: bold;
 
-    padding: 1.2rem;
+    padding: 1rem;
     border: solid .2rem #FFF;
     border-radius: 5rem;
+    margin-right: 1rem;
 
-    transition: opacity .3s ease;
+    transition: all .2s ease;
     cursor: pointer;
 
     color: #FFF;
 
+    &.signin {
+        color: #e5e5e5;
+        border-color: #e5e5e5;
+    }
+
     &:hover {
-        opacity: .7;
+        color: rgba(0, 0, 0, .5);
+        border-color: rgba(0, 0, 0, .5);
     };
 `;

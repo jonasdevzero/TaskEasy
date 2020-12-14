@@ -34,6 +34,10 @@ export default class MyDocument extends Document {
             <Html lang="en">
                 <Head>
                     <meta charSet='utf-8' />
+                    <link
+                        rel='icon' type='image/png'
+                        href='/checklist.png'
+                    />
                 </Head>
                 <body>
                     <Main />
