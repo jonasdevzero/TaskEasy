@@ -30,10 +30,10 @@ export default function Signin() {
     useEffect(() => {
         if (token === "") return;
 
-        // api.post("/user/auth", { token })
-        //     .then(({ data }) => {
-        //         if (data.auth) return router.push("/app");
-        //     });
+        api.post("/user/auth", { token })
+            .then(({ data }) => {
+                if (data.auth) return router.push("/app");
+            });
     }, []);
 
     async function login(event: React.FormEvent<HTMLFormElement>) {
@@ -57,7 +57,7 @@ export default function Signin() {
                 <FormContainer>
                     <Form onSubmit={login}>
                         {error.length > 0 ? (
-                            <Error>{error}</Error>
+                            <Error title="error">{error}</Error>
                         ) : null}
 
                         <Wrapper>
