@@ -26,12 +26,12 @@ export default function Home() {
             <p>Here you made your objectives easily.</p>
 
             <div>
-              <Link href="/signin">
-                <StyledLink className="signin">SIGN IN</StyledLink>
-              </Link>
-
               <Link href="/signup">
                 <StyledLink>START NOW</StyledLink>
+              </Link>
+
+              <Link href="/signin">
+                <StyledLink className="signin">SIGN IN</StyledLink>
               </Link>
             </div>
           </Info>

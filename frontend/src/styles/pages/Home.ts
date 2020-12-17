@@ -16,6 +16,10 @@ export const Content = styled.div`
 
     @media (max-width: 900px) {
         padding: 5rem 3rem;
+
+        img {
+            display: none;
+        };
     };
 `;
 
@@ -42,29 +46,49 @@ export const Info = styled.div`
         margin-top: 3rem;
         margin-bottom: 2rem;
     };
+
+    @media (max-width: 900px) {
+        div {
+            justify-content: center;
+        };
+        h1, span, p {
+            text-align: center;
+        }
+    };
+    @media (max-width: 400px) {
+        h1 {
+            font-size: 4;
+
+            span {
+                font-size: 10rem;
+            };
+        }; 
+
+        p {
+            font-size: 2rem;
+        };
+    };
 `;
 
 export const StyledLink = styled.a`
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: bold;
 
-    padding: 1rem;
+    padding: 1.3rem;
     border: solid .2rem #FFF;
     border-radius: 5rem;
     margin-right: 1rem;
 
-    transition: all .2s ease;
+    transition: opacity .3s ease;
     cursor: pointer;
 
     color: #FFF;
 
-    &.signin {
-        color: #e5e5e5;
-        border-color: #e5e5e5;
-    }
-
     &:hover {
-        color: rgba(0, 0, 0, .5);
-        border-color: rgba(0, 0, 0, .5);
+        opacity: .7;
+    };
+
+    @media (max-width: 900px) {
+        margin-top: 2rem;
     };
 `;
