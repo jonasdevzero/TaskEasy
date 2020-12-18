@@ -29,6 +29,7 @@ export class createUser1608230817269 implements MigrationInterface {
                 {
                     name: "coin",
                     type: "integer",
+                    default: 0,
                 },
                 {
                     name: "created_at",

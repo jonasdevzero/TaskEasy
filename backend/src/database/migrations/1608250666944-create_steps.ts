@@ -1,27 +1,22 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class createTask1608232887330 implements MigrationInterface {
+export class createSteps1608250666944 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(new Table({
-            name: "task",
+            name: "step",
             columns: [
                 {
                     name: "id",
                     type: "integer",
-                    unsigned: true,
-                    isPrimary: true,
                     isGenerated: true,
+                    isPrimary: true,
+                    unsigned: true,
                     generationStrategy: "increment",
                 },
                 {
-                    name: "user_id",
+                    name: "task_id",
                     type: "integer",
-                },
-                {
-                    name: "project_id",
-                    type: "integer",
-                    isNullable: true,
                 },
                 {
                     name: "name",
@@ -31,35 +26,22 @@ export class createTask1608232887330 implements MigrationInterface {
                     name: "description",
                     type: "text",
                 },
-                {
-                    name: "completed",
-                    type: "boolean",
-                    default: false,
-                },
-                {
-                    name: "created_at",
-                    type: "date",
-                },
-                {
-                    name: "completed_at",
-                    type: "date",
-                },
             ],
             foreignKeys: [
                 {
-                    name: "UserTasks",
-                    columnNames: ["user_id"],
-                    referencedTableName: "user",
+                    name: "TaskSteps",
+                    columnNames: ["task_id"],
+                    referencedTableName: "task",
                     referencedColumnNames: ["id"],
-                    onUpdate: "CASCADE",
                     onDelete: "CASCADE",
+                    onUpdate: "CASCADE",
                 },
             ],
         }));
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable("task");
+        await queryRunner.dropTable("step");
     }
 
 }
