@@ -26,6 +26,14 @@ export class createSteps1608250666944 implements MigrationInterface {
                     name: "description",
                     type: "text",
                 },
+                {
+                    name: "completed",
+                    type: "boolean",
+                },
+                {
+                    name: "completed_at",
+                    type: "date",
+                },
             ],
             foreignKeys: [
                 {

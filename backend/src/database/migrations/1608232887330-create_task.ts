@@ -54,6 +54,14 @@ export class createTask1608232887330 implements MigrationInterface {
                     onUpdate: "CASCADE",
                     onDelete: "CASCADE",
                 },
+                {
+                    name: "ProjectTasks",
+                    columnNames: ["project_id"],
+                    referencedTableName: "project",
+                    referencedColumnNames: ["id"],
+                    onDelete: "CASCADE",
+                    onUpdate: "CASCADE",
+                },
             ],
         }));
     }
