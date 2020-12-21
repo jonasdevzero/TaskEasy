@@ -22,11 +22,11 @@ export default class User {
     @Column()
     created_at: Date;
 
-    @OneToMany(_ => Task, task => task.user, { cascade: ["remove", "update"] })
+    @OneToMany(_ => Task, task => task.user)
     @JoinColumn({ name: "user_id" })
     task: Task;
 
-    @OneToMany(_ => Project, project => project.user, { cascade: ["remove", "update"] })
+    @OneToMany(_ => Project, project => project.user)
     @JoinColumn({ name: "user_id" })
     project: Project;
 };

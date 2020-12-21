@@ -31,7 +31,7 @@ export default class Task {
     @JoinColumn({ name: "project_id" })
     project: Project;
 
-    @OneToMany(_ => Step, step => step.task, { cascade: ["update", "remove"] })
+    @OneToMany(_ => Step, step => step.task)
     @JoinColumn({ name: "task_id" })
     step: Step;
 };

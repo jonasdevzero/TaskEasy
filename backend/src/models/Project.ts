@@ -17,7 +17,7 @@ export default class Project {
     @JoinColumn({ name: "user_id" })
     user: User;
 
-    @OneToMany(_ => Task, task => task.project, { cascade: ["update", "remove"] })
+    @OneToMany(_ => Task, task => task.project)
     @JoinColumn({ name: "project_id" })
     task: Task;
 };
