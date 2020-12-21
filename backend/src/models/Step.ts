@@ -18,7 +18,7 @@ export default class Step {
     @Column()
     completed_at: Date;
 
-    @ManyToOne(_ => Task, task => task.step)
+    @ManyToOne(_ => Task, task => task.step, { cascade: ["remove", "update"] })
     @JoinColumn({ name: "task_id" })
     task: Task;
 };

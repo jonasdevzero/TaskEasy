@@ -13,11 +13,11 @@ export default class Project {
     @Column()
     description: string;
 
-    @ManyToOne(_ => User, user => user.project)
+    @ManyToOne(_ => User, user => user.project, { cascade: ["update", "remove"] })
     @JoinColumn({ name: "user_id" })
     user: User;
 
-    @OneToMany(_ => Task, task => task.project)
+    @OneToMany(_ => Task, task => task.project, { cascade: ["update", "remove"] })
     @JoinColumn({ name: "project_id" })
     task: Task;
 };

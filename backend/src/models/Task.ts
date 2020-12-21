@@ -23,15 +23,15 @@ export default class Task {
     @Column()
     completed_at: Date;
 
-    @ManyToOne(_ => User, user => user.task)
+    @ManyToOne(_ => User, user => user.task, { cascade: ["update", "remove"] })
     @JoinColumn({ name: "user_id" })
     user: User;
 
-    @ManyToOne(_ => Project, project => project.task)
+    @ManyToOne(_ => Project, project => project.task, { cascade: ["update", "remove"] })
     @JoinColumn({ name: "project_id" })
     project: Project;
 
-    @OneToMany(_ => Step, step => step.task)
+    @OneToMany(_ => Step, step => step.task, { cascade: ["update", "remove"] })
     @JoinColumn({ name: "task_id" })
     step: Step;
 };
