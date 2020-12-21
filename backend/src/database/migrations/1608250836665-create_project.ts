@@ -45,6 +45,7 @@ export class createProject1608250836665 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.dropTable("project");
     }
 
 }
