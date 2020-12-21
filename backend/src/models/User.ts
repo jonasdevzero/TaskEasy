@@ -1,4 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinColumn } from 'typeorm';
+import Project from './Project';
 import Task from "./Task";
 
 @Entity()
@@ -16,7 +17,7 @@ export default class User {
     password: string;
 
     @Column()
-    coin: string;
+    coin: number;
 
     @Column()
     created_at: Date;
@@ -24,4 +25,8 @@ export default class User {
     @OneToMany(_ => Task, task => task.user, { cascade: ["remove", "update"] })
     @JoinColumn({ name: "user_id" })
     task: Task;
+
+    @OneToMany(_ => Project, project => project.user, { cascade: ["remove", "update"] })
+    @JoinColumn({ name: "user_id" })
+    project: Project;
 };
