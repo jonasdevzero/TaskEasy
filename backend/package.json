@@ -7,7 +7,7 @@
     "start": "node src/server.js",
     "dev": "tsnd --transpile-only --ignore-watch node_modules src/server.ts",
     "build": "tsc",
-    "typeorm": "./node_modules/typeorm/cli.js"
+    "typeorm": "tsnd ./node_modules/typeorm/cli.js"
   },
   "keywords": [],
   "author": "",
