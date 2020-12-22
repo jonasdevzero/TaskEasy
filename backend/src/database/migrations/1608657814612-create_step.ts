@@ -1,21 +1,25 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class createProject1608250836665 implements MigrationInterface {
+export class createStep1608657814612 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(new Table({
-            name: "project",
+            name: "step",
             columns: [
                 {
                     name: "id",
                     type: "integer",
-                    isPrimary: true,
                     isGenerated: true,
+                    isPrimary: true,
                     unsigned: true,
                     generationStrategy: "increment",
                 },
                 {
-                    name: "user_id",
+                    name: "task_id",
+                    type: "integer",
+                },
+                {
+                    name: "step_sequence",
                     type: "integer",
                 },
                 {
@@ -27,25 +31,29 @@ export class createProject1608250836665 implements MigrationInterface {
                     type: "text",
                 },
                 {
-                    name: "created_at",
+                    name: "completed",
+                    type: "boolean",
+                },
+                {
+                    name: "completed_at",
                     type: "date",
                 },
             ],
             foreignKeys: [
                 {
-                    name: "UserProject",
-                    columnNames: ["user_id"],
-                    referencedTableName: "user",
+                    name: "TaskSteps",
+                    columnNames: ["task_id"],
+                    referencedTableName: "task",
                     referencedColumnNames: ["id"],
                     onDelete: "CASCADE",
                     onUpdate: "CASCADE",
                 },
             ],
-        }))
+        }));
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable("project");
+        await queryRunner.dropTable("step");
     }
 
 }

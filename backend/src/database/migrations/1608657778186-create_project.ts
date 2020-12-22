@@ -1,21 +1,21 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class createSteps1608250666944 implements MigrationInterface {
+export class createProject1608657778186 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(new Table({
-            name: "step",
+            name: "project",
             columns: [
                 {
                     name: "id",
                     type: "integer",
-                    isGenerated: true,
                     isPrimary: true,
+                    isGenerated: true,
                     unsigned: true,
                     generationStrategy: "increment",
                 },
                 {
-                    name: "task_id",
+                    name: "user_id",
                     type: "integer",
                 },
                 {
@@ -27,6 +27,10 @@ export class createSteps1608250666944 implements MigrationInterface {
                     type: "text",
                 },
                 {
+                    name: "created_at",
+                    type: "date",
+                },
+                {
                     name: "completed",
                     type: "boolean",
                 },
@@ -35,21 +39,11 @@ export class createSteps1608250666944 implements MigrationInterface {
                     type: "date",
                 },
             ],
-            foreignKeys: [
-                {
-                    name: "TaskSteps",
-                    columnNames: ["task_id"],
-                    referencedTableName: "task",
-                    referencedColumnNames: ["id"],
-                    onDelete: "CASCADE",
-                    onUpdate: "CASCADE",
-                },
-            ],
         }));
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable("step");
+        await queryRunner.dropTable("project");
     }
 
 }
