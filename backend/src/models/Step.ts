@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from "typeorm";
 import Task from "./Task";
 
-@Entity()
+@Entity("step")
 export default class Step {
     @PrimaryGeneratedColumn("increment")
     id: number;

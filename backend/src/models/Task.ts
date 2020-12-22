@@ -2,7 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToMan
 import Project from './Project';
 import Step from './Step';
 
-@Entity()
+@Entity("task")
 export default class Task {
     @PrimaryGeneratedColumn("increment")
     id: number;
