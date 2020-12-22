@@ -32,13 +32,13 @@ export class createTask1608657802400 implements MigrationInterface {
                     type: "text",
                 },
                 {
+                    name: "created_at",
+                    type: "date",
+                },
+                {
                     name: "completed",
                     type: "boolean",
                     default: false,
-                },
-                {
-                    name: "created_at",
-                    type: "date",
                 },
                 {
                     name: "completed_at",

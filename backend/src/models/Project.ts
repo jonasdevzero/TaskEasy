@@ -1,6 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToMany } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, JoinColumn } from "typeorm";
 import Task from "./Task";
-import User from "./User";
 
 @Entity()
 export default class Project {
@@ -8,14 +7,22 @@ export default class Project {
     id: number;
 
     @Column()
+    user_id: number;
+
+    @Column()
     name: string;
 
     @Column()
     description: string;
 
-    @ManyToOne(_ => User, user => user.project, { cascade: ["update", "remove"] })
-    @JoinColumn({ name: "user_id" })
-    user: User;
+    @Column()
+    created_at: Date;
+
+    @Column()
+    completed: boolean;
+
+    @Column()
+    completed_at: Date;
 
     @OneToMany(_ => Task, task => task.project)
     @JoinColumn({ name: "project_id" })

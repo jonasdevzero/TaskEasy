@@ -1,12 +1,17 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
 import Project from './Project';
 import Step from './Step';
-import User from "./User";
 
 @Entity()
 export default class Task {
     @PrimaryGeneratedColumn("increment")
     id: number;
+
+    @Column()
+    user_id: number;
+
+    @Column()
+    project_id: null | number;
 
     @Column()
     name: string;
@@ -15,17 +20,13 @@ export default class Task {
     description: string;
 
     @Column()
-    completed: boolean;
-
-    @Column()
     created_at: Date;
 
     @Column()
-    completed_at: Date;
+    completed: boolean;
 
-    @ManyToOne(_ => User, user => user.task, { cascade: ["update", "remove"] })
-    @JoinColumn({ name: "user_id" })
-    user: User;
+    @Column()
+    completed_at: Date;
 
     @ManyToOne(_ => Project, project => project.task, { cascade: ["update", "remove"] })
     @JoinColumn({ name: "project_id" })
