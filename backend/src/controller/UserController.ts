@@ -9,9 +9,30 @@ import UserView from "../views/user_view";
 export default {
     async index(resquest: Request, response: Response) {
         try {
+            const userRepository = getRepository(User);
+            const users = await userRepository.find();
 
+            return response.status(200).json({ users: UserView.renderMany(users) });
         } catch (err) {
             console.log("Error on { index } [user] -> ", err);
+            return response.status(500).json({ message: "Internal Server Error" });
+        }
+    },
+
+    async show(request: Request, response: Response) {
+        try {
+            const username = request.query.username;
+
+            const userRepository = getRepository(User);
+            const user = await userRepository.findOne({ where: { username } });
+
+            if (!user) {
+                return response.status(400).json({ message: "user not exists" });
+            };
+
+            return response.status(200).json({ user: UserView.render(user) });
+        } catch (err) {
+            console.log("Error on { show } [user] -> ", err);
             return response.status(500).json({ message: "Internal Server Error" });
         }
     },
