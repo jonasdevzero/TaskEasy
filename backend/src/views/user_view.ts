@@ -4,6 +4,7 @@ export default {
     render(user: User) {
         return {
             name: user.name,
+            username: user.username,
             email: user.email,
             coin: user.coin,
             created_at: user.created_at,

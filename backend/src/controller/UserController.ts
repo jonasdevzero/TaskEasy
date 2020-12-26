@@ -7,11 +7,21 @@ import * as Yup from "yup";
 import UserView from "../views/user_view";
 
 export default {
+    async index(resquest: Request, response: Response) {
+        try {
+
+        } catch (err) {
+            console.log("Error on { index } [user] -> ", err);
+            return response.status(500).json({ message: "Internal Server Error" });
+        }
+    },
+
     async create(request: Request, response: Response) {
         try {
-            const { name, email, password } = request.body;
+            const { name, username, email, password } = request.body;
             const data = {
                 name,
+                username,
                 email,
                 password,
                 coin: 0,
@@ -23,6 +33,7 @@ export default {
             // validate data
             const schema = Yup.object().shape({
                 name: Yup.string().required(),
+                username: Yup.string().required(),
                 email: Yup.string().required(),
                 password: Yup.string().required(),
             });
