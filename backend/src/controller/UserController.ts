@@ -1,7 +1,9 @@
 import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 import User from "../models/User";
-import { encryptPassword, generateToken, validateData } from "../utils/user";
+import { encryptPassword, generateToken } from "../utils/user";
+import { getTime } from "../utils/date";
+import * as Yup from "yup";
 
 export default {
     async create(request: Request, response: Response) {
@@ -12,22 +14,30 @@ export default {
                 email,
                 password,
                 coin: 0,
-                created_at: Date.now(),
-                modified_at: Date.now()
+                created_at: getTime(),
+                modified_at: getTime(),
             };
             const userRepository = getRepository(User);
+
+            // validate data
+            const schema = Yup.object().shape({
+                name: Yup.string().required(),
+                email: Yup.string().required(),
+                password: Yup.string().required(),
+            });
+            await schema.validate(data, {
+                abortEarly: false,
+            }).catch(err => response.status(400).json({
+                message: err.message,
+                fields: err.inner.map((field: { path: string }) => field.path),
+            }));
 
             const existsUser = await userRepository.findOne({ where: { email } });
             if (existsUser)
                 return response.status(400).json({
                     message: "User already exists",
-                    field: "email",
+                    fields: ["email"],
                 });
-
-            // validate data
-            validateData(request.body).catch(err => {
-                return response.status(400).json(err)
-            });
 
             data.password = encryptPassword(password);
 
