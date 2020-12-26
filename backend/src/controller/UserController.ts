@@ -4,6 +4,7 @@ import User from "../models/User";
 import { encryptPassword, generateToken } from "../utils/user";
 import { getTime } from "../utils/date";
 import * as Yup from "yup";
+import UserView from "../views/user_view";
 
 export default {
     async create(request: Request, response: Response) {
@@ -44,7 +45,7 @@ export default {
             const user = userRepository.create(data);
             await userRepository.save(user);
 
-            return response.status(201).json({ token: generateToken({ id: user.id }), user });
+            return response.status(201).json({ token: generateToken({ id: user.id }), user: UserView.render(user) });
         } catch (err) {
             console.log("Error on { create } [user] -> ", err);
             return response.status(500).json({ message: "Internal Server Error" });
