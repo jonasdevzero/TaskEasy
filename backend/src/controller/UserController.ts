@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import { getRepository } from "typeorm";
 import User from "../models/User";
 import { encryptPassword, generateToken } from "../utils/user";
@@ -80,6 +80,39 @@ export default {
             return response.status(201).json({ token: generateToken({ id: user.id }), user: UserView.render(user) });
         } catch (err) {
             console.log("Error on { create } [user] -> ", err);
+            return response.status(500).json({ message: "Internal Server Error" });
+        };
+    },
+
+    async delete(request: Request, response: Response) {
+        try {
+            const id = request.params.id;
+
+            const userRepository = getRepository(User);
+            await userRepository.delete(id)
+                .catch(err => response.status(400).json({ message: "Invalid id" }));
+
+            return response.status(200).json({ message: "ok" });
+        } catch (err) {
+            console.log("Error on { create } [user] -> ", err);
+            return response.status(500).json({ message: "Internal Server Error" });
+        };
+    },
+
+    async login(request: Request, response: Response) {
+        try {
+
+        } catch (err) {
+            console.log("Error on { login } [user] -> ", err);
+            return response.status(500).json({ message: "Internal Server Error" });
+        };
+    },
+
+    async auth(request: Request, response: Response, next: NextFunction) {
+        try {
+
+        } catch (err) {
+            console.log("Error on { auth } [user] -> ", err);
             return response.status(500).json({ message: "Internal Server Error" });
         };
     },
