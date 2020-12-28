@@ -21,13 +21,13 @@ export default {
 
     async show(request: Request, response: Response) {
         try {
-            const username = request.query.username;
+            const username = request.params.username;
 
             const userRepository = getRepository(User);
             const user = await userRepository.findOne({ where: { username } });
 
             if (!user) {
-                return response.status(400).json({ message: "user not exists" });
+                return response.status(404).json({ message: "user not exists" });
             };
 
             return response.status(200).json({ user: UserView.render(user) });
@@ -84,6 +84,25 @@ export default {
         };
     },
 
+    async update(request: Request, response: Response) {
+        try {
+            const id = request.params.id;
+
+            const userRepository = getRepository(User);
+
+            await userRepository.update(id, request.body);
+            const user = await userRepository.findOne(id);
+
+            if (!user)
+                return response.status(404).json({ message: "User not found" });
+
+            return response.status(200).json({ user: UserView.render(user) })
+        } catch (err) {
+            console.log("Error on { update } [user] -> ", err);
+            return response.status(500).json({ message: "Internal Server Error" });
+        };
+    },
+
     async delete(request: Request, response: Response) {
         try {
             const id = request.params.id;
@@ -107,7 +126,7 @@ export default {
             const user = await userRepository.findOne({ where: { email } });
 
             if (!user)
-                return response.status(400).json({
+                return response.status(404).json({
                     message: "User not exists",
                     fields: ["email"],
                 });
@@ -133,7 +152,7 @@ export default {
             return response.status(401).json({ message: "Access denied" });
 
         try {
-            const { access_token } = request.headers;
+            const access_token = request.headers["access-token"];
 
             const userVerified = authenticateToken(String(access_token));
 
