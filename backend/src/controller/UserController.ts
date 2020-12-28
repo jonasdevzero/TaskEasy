@@ -42,7 +42,7 @@ export default {
             const { name, username, email, password } = request.body;
             const data = {
                 name,
-                username: "@" + username,
+                username,
                 email,
                 password,
                 coin: 0,
@@ -87,10 +87,14 @@ export default {
     async update(request: Request, response: Response) {
         try {
             const id = request.params.id;
+            const {
+                name,
+                username,
+            } = request.body;
 
             const userRepository = getRepository(User);
 
-            await userRepository.update(id, request.body);
+            await userRepository.update(id, { name, username, modified_at: getTime() });
             const user = await userRepository.findOne(id);
 
             if (!user)
@@ -154,7 +158,7 @@ export default {
         try {
             const access_token = request.headers["access-token"];
 
-            const userVerified = authenticateToken(String(access_token));
+            const userVerified = authenticateToken(access_token.toString());
 
             if (request.body.u === "true") {
                 request.body.user = userVerified;
