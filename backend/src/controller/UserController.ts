@@ -42,7 +42,7 @@ export default {
             const { name, username, email, password } = request.body;
             const data = {
                 name,
-                username,
+                username: "@" + username,
                 email,
                 password,
                 coin: 0,
