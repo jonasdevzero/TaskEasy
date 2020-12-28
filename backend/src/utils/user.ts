@@ -1,7 +1,6 @@
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
-
 const secret = process.env.USER_SECRET_PASSWORD;
 
 export function encryptPassword(password: string) {
@@ -10,7 +9,7 @@ export function encryptPassword(password: string) {
 };
 
 export function comparePasswords(password: string, secretPassword: string) {
-    return bcrypt.compareSync(password, secretPassword) ? true : false;
+    return bcrypt.compareSync(password, secretPassword);
 };
 
 export function generateToken(params: object) {
