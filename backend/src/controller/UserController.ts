@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { getRepository } from "typeorm";
 import User from "../models/User";
-import { encryptPassword, generateToken } from "../utils/user";
+import { encryptPassword, generateToken, comparePasswords, authenticateToken } from "../utils/user";
 import { getTime } from "../utils/date";
 import * as Yup from "yup";
 import UserView from "../views/user_view";
@@ -101,7 +101,27 @@ export default {
 
     async login(request: Request, response: Response) {
         try {
+            const { email, password } = request.body;
 
+            const userRepository = getRepository(User);
+            const user = await userRepository.findOne({ where: { email } });
+
+            if (!user)
+                return response.status(400).json({
+                    message: "User not exists",
+                    fields: ["email"],
+                });
+
+            if (!comparePasswords(password, user.password))
+                return response.status(400).json({
+                    message: "Invalid Password",
+                    fields: ["password"],
+                });
+
+            return response.status(200).json({
+                token: generateToken({ id: user.id }),
+                user: UserView.render(user),
+            });
         } catch (err) {
             console.log("Error on { login } [user] -> ", err);
             return response.status(500).json({ message: "Internal Server Error" });
@@ -109,8 +129,28 @@ export default {
     },
 
     async auth(request: Request, response: Response, next: NextFunction) {
-        try {
+        if (!request.headers.access_token)
+            return response.status(401).json({ message: "Access denied" });
 
+        try {
+            const { access_token } = request.headers;
+
+            const userVerified = authenticateToken(String(access_token));
+
+            if (request.body.u === "true") {
+                request.body.user = userVerified;
+                const { id } = request.body.user;
+
+                const userRepository = getRepository(User);
+                const user = await userRepository.findOne(id);
+
+                if (!user)
+                    return response.status(404).json({ error: "User not found" });
+
+                return response.status(200).json({ user: UserView.render(user) });
+            };
+
+            next();
         } catch (err) {
             console.log("Error on { auth } [user] -> ", err);
             return response.status(500).json({ message: "Internal Server Error" });
