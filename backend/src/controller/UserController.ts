@@ -148,7 +148,7 @@ export default {
     },
 
     async auth(request: Request, response: Response, next: NextFunction) {
-        if (!request.headers.access_token)
+        if (!request.headers["access-token"])
             return response.status(401).json({ message: "Access denied" });
 
         try {
