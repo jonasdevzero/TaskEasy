@@ -47,9 +47,22 @@ export default {
                 password,
                 coin: 0,
                 created_at: getTime(),
-                modified_at: getTime(),
             };
             const userRepository = getRepository(User);
+
+            const existsUser = await userRepository.findOne({ where: { email } });
+            if (existsUser)
+                return response.status(400).json({
+                    message: "User already exists",
+                    fields: ["email"],
+                });
+
+            const existsUsername = await userRepository.findOne({ where: { username } });
+            if (existsUsername)
+                return response.status(400).json({
+                    message: "Username already exists",
+                    fields: ["username"],
+                });
 
             // validate data
             const schema = Yup.object().shape({
@@ -64,13 +77,6 @@ export default {
                 message: err.message,
                 fields: err.inner.map((field: { path: string }) => field.path),
             }));
-
-            const existsUser = await userRepository.findOne({ where: { email } });
-            if (existsUser)
-                return response.status(400).json({
-                    message: "User already exists",
-                    fields: ["email"],
-                });
 
             data.password = encryptPassword(password);
 
