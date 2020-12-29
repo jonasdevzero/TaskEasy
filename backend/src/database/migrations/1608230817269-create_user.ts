@@ -39,11 +39,12 @@ export class createUser1608230817269 implements MigrationInterface {
                 },
                 {
                     name: "created_at",
-                    type: "date",
+                    type: "varchar",
                 },
                 {
                     name: "modified_at",
-                    type: "date",
+                    type: "varchar",
+                    isNullable: true,
                 },
             ],
         }));

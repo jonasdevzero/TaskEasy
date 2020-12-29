@@ -21,8 +21,8 @@ export default class User {
     coin: number;
 
     @Column()
-    created_at: Date;
+    created_at: string;
 
     @Column()
-    modified_at: Date;
+    modified_at: string;
 };
