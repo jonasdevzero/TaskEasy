@@ -10,8 +10,8 @@ router.get('/', (req, res) => {
 router.get("/user", UserController.index);
 router.get("/user/:username", UserController.show);
 router.post("/user", UserController.create);
-router.put("/user", UserController.update);
-router.delete("/user", UserController.delete);
+router.put("/user/:id", UserController.update);
+router.delete("/user/:id", UserController.delete);
 router.post("/login", UserController.login);
 router.post("/auth", UserController.auth);
 
