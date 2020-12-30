@@ -33,6 +33,10 @@ export class createUser1608230817269 implements MigrationInterface {
                     type: "varchar",
                 },
                 {
+                    name: "image",
+                    type: "text",
+                },
+                {
                     name: "coin",
                     type: "integer",
                     default: 0,

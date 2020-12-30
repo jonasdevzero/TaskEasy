@@ -7,6 +7,7 @@ export default {
             name: user.name,
             username: user.username,
             email: user.email,
+            image: user.image,
             coin: user.coin,
             created_at: user.created_at,
         };

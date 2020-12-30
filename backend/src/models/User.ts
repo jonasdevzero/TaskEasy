@@ -18,6 +18,9 @@ export default class User {
     password: string;
 
     @Column()
+    image: string;
+
+    @Column()
     coin: number;
 
     @Column()
