@@ -28,7 +28,7 @@ export class createProject1608657778186 implements MigrationInterface {
                 },
                 {
                     name: "created_at",
-                    type: "date",
+                    type: "varchar",
                 },
                 {
                     name: "completed",
@@ -36,7 +36,7 @@ export class createProject1608657778186 implements MigrationInterface {
                 },
                 {
                     name: "completed_at",
-                    type: "date",
+                    type: "varchar",
                 },
             ],
         }));

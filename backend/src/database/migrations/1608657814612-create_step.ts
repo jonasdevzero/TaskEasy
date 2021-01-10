@@ -36,7 +36,7 @@ export class createStep1608657814612 implements MigrationInterface {
                 },
                 {
                     name: "completed_at",
-                    type: "date",
+                    type: "varchar",
                 },
             ],
             foreignKeys: [

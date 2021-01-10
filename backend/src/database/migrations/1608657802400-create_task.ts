@@ -33,7 +33,7 @@ export class createTask1608657802400 implements MigrationInterface {
                 },
                 {
                     name: "created_at",
-                    type: "date",
+                    type: "varchar",
                 },
                 {
                     name: "completed",
@@ -42,7 +42,7 @@ export class createTask1608657802400 implements MigrationInterface {
                 },
                 {
                     name: "completed_at",
-                    type: "date",
+                    type: "varchar",
                 },
             ],
             foreignKeys: [
