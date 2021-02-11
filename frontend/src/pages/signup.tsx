@@ -21,6 +21,7 @@ export default function Signup() {
     const [token, setToken] = usePersistedState("token", "");
 
     const [name, setName] = useState("");
+    const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -31,7 +32,7 @@ export default function Signup() {
     async function create(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
-        await api.post("user", { name, email, password })
+        await api.post("user", { name, username, email, password })
             .then(({ data }) => {
                 setToken(data.token);
                 router.push("/app");
@@ -55,6 +56,11 @@ export default function Signup() {
                         <Wrapper>
                             <Label>Name</Label>
                             <Input type="text" value={name} onChange={e => setName(e.target.value)} />
+                        </Wrapper>
+
+                        <Wrapper>
+                            <Label>Username</Label>
+                            <Input type="text" value={username} onChange={e => setUsername(e.target.value)} />
                         </Wrapper>
 
                         <Wrapper>

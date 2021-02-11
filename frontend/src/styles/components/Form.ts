@@ -40,5 +40,5 @@ export const Submit = styled.button`
 `;
 
 export const Error = styled.strong`
-
+    color: #000;
 `;
