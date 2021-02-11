@@ -35,6 +35,7 @@ export class createUser1608230817269 implements MigrationInterface {
                 {
                     name: "image",
                     type: "text",
+                    isNullable: true,
                 },
                 {
                     name: "coin",

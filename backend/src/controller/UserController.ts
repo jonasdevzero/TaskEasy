@@ -158,13 +158,14 @@ export default {
     },
 
     async auth(request: Request, response: Response, next: NextFunction) {
-        if (!request.headers["access-token"])
+        if (!request.body.token)
             return response.status(401).json({ message: "Access denied" });
 
         try {
-            const access_token = request.headers["access-token"];
+            const access_token = request.body.token;
 
             const userVerified = authenticateToken(access_token.toString());
+            request.body.auth = true;
 
             if (request.body.u === "true") {
                 request.body.user = userVerified;

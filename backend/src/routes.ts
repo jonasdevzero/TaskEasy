@@ -13,6 +13,6 @@ router.post("/user", UserController.create);
 router.put("/user/:id", UserController.update);
 router.delete("/user/:id", UserController.delete);
 router.post("/login", UserController.login);
-router.post("/auth", UserController.auth);
+router.post("/auth", UserController.auth, (req, res) => res.status(200).json({ auth: req.body.auth }));
 
 export default router;
