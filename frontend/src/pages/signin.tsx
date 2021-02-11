@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { AxiosError } from 'axios';
 
 import api from '../services/api';
 import usePersistedState from '../hooks/usePersistedState';
@@ -30,21 +31,35 @@ export default function Signin() {
     useEffect(() => {
         if (token === "") return;
 
-        api.post("/user/auth", { token })
+        api.post("/auth", { token })
             .then(({ data }) => {
                 if (data.auth) return router.push("/app");
             });
-    }, []);
+    }, [token]);
 
     async function login(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
-        await api.post("/user/login", { email, password })
+        await api.post("/login", { email, password })
             .then(({ data }) => {
                 setToken(data.token);
                 router.push("/app");
             })
-            .catch(error => setError(error.message));
+            .catch((error: AxiosError) => {
+                const { message, fields } = error.response.data;
+
+                setError(message);
+
+                fields?.forEach((field: string) => {
+                    switch (field) {
+                        case "email":
+                            setEmail("");
+                            break;
+                        case "password":
+                            setPassword("");
+                    };
+                });
+            });
     };
 
     return (
