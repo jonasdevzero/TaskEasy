@@ -28,11 +28,10 @@ export const Info = styled.div`
     flex-direction: column;
     flex: 1;
     justify-content: center;
+`;
 
-    div {
-        display: flex;
-    };
-    h1 {
+export const LogoContainer = styled.div`
+     h1 {
         font-size: 5rem;
         
         span {
@@ -42,9 +41,8 @@ export const Info = styled.div`
         };
     };
     p {
-        font-size: 2.5rem;
+        font-size: 2rem;
         margin-top: 3rem;
-        margin-bottom: 2rem;
     };
 
     @media (max-width: 900px) {
@@ -62,33 +60,46 @@ export const Info = styled.div`
             span {
                 font-size: 10rem;
             };
-        }; 
+        };
+    };
+`;
 
+export const LinkContainer = styled.div`
+    display: flex;
+    margin-top: 4rem;
+
+    p {
+        margin: 0 1rem;
+        font-size: 1.8rem;
+        display: flex;
+        align-items: center;
+    };
+
+    @media (max-width: 900px) {
+        justify-content: center;
+    };
+    @media (max-width: 400px) {
+        flex-direction: column;
+        align-items: center;
+
+        a {
+            width: 15rem;
+        };
         p {
-            font-size: 2rem;
+            margin: .5rem 0;
         };
     };
 `;
 
 export const StyledLink = styled.a`
-    font-size: 1.6rem;
-    font-weight: bold;
+    font-size: 1.4rem;
+    font-weight: 500;
+    text-align: center;
 
-    padding: 1.3rem;
+    padding: 1rem 1.3rem;
     border: solid .2rem #FFF;
-    border-radius: 5rem;
-    margin-right: 1rem;
+    border-radius: .2rem;
 
     transition: opacity .3s ease;
     cursor: pointer;
-
-    color: #FFF;
-
-    &:hover {
-        opacity: .7;
-    };
-
-    @media (max-width: 900px) {
-        margin-top: 2rem;
-    };
 `;

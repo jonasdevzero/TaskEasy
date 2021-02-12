@@ -7,7 +7,9 @@ import {
 import {
   Content,
   Info,
-  StyledLink
+  LogoContainer,
+  LinkContainer,
+  StyledLink,
 } from '../styles/pages/Home';
 
 export default function Home() {
@@ -20,20 +22,24 @@ export default function Home() {
       <Main>
         <Content>
           <Info>
-            <h1>
-              Task <span>Easy</span>
-            </h1>
-            <p>Here you made your objectives easily.</p>
+            <LogoContainer>
+              <h1>
+                Task <span>Easy</span>
+              </h1>
+              <p>Here you made your objectives easily.</p>
+            </LogoContainer>
 
-            <div>
+            <LinkContainer>
               <Link href="/signup">
                 <StyledLink>START NOW</StyledLink>
               </Link>
 
+              <p>or</p>
+
               <Link href="/signin">
                 <StyledLink className="signin">SIGN IN</StyledLink>
               </Link>
-            </div>
+            </LinkContainer>
           </Info>
 
           <img src="/checklist.png" alt="" />
