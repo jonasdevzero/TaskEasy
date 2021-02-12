@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Head from 'next/head';
+import Link from 'next/link'
 import { useRouter } from 'next/router';
 import { AxiosError } from 'axios';
 
@@ -8,15 +9,13 @@ import usePersistedState from '../hooks/usePersistedState';
 
 import { Main } from '../styles/pages/Global';
 import {
-    FormContainer
-} from '../styles/pages/Signin';
-import {
     Form,
     Input,
     Label,
     Wrapper,
     Submit,
     Error,
+    Info,
 } from '../styles/components/Form';
 
 export default function Signin() {
@@ -69,25 +68,35 @@ export default function Signin() {
             </Head>
 
             <Main>
-                <FormContainer>
+                <div>
                     <Form onSubmit={login}>
+
+                        <Link href="/">
+                            <img src="/checklist2.png" alt="" />
+                        </Link>
+
                         {error.length > 0 ? (
                             <Error title="error">{error}</Error>
                         ) : null}
 
                         <Wrapper>
-                            <Label>email</Label>
+                            <Label>Email</Label>
                             <Input type="text" value={email} onChange={e => setEmail(e.target.value)} />
                         </Wrapper>
 
                         <Wrapper>
-                            <Label>password</Label>
+                            <Label>Password</Label>
                             <Input type="password" value={password} onChange={e => setPassword(e.target.value)} />
                         </Wrapper>
 
                         <Submit type="submit">SignIn</Submit>
+
+                        <Info>
+                            No have an account?
+                            <Link href="/signup">click here</Link>
+                        </Info>
                     </Form>
-                </FormContainer>
+                </div>
             </Main>
         </>
     );
