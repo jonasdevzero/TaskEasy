@@ -39,10 +39,9 @@ export default {
 
     async create(request: Request, response: Response) {
         try {
-            const { name, username, email, password } = request.body;
+            const { name, email, password } = request.body;
             const data = {
                 name,
-                username,
                 email,
                 password,
                 coin: 0,
@@ -52,22 +51,11 @@ export default {
 
             const existsUser = await userRepository.findOne({ where: { email } });
             if (existsUser)
-                return response.status(400).json({
-                    message: "User already exists",
-                    fields: ["email"],
-                });
-
-            const existsUsername = await userRepository.findOne({ where: { username } });
-            if (existsUsername)
-                return response.status(400).json({
-                    message: "Username already exists",
-                    fields: ["username"],
-                });
+                return response.status(400).json({ message: "User already exists" });
 
             // validate data
             const schema = Yup.object().shape({
                 name: Yup.string().required(),
-                username: Yup.string().required(),
                 email: Yup.string().required(),
                 password: Yup.string().required(),
             });
